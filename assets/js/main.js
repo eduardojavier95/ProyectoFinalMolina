@@ -54,11 +54,10 @@ function cardTemplate(product, isStore) {
 // Asegurarse de llamar a attachStoreEventHandlers después de cualquier actualización del carrito también
 function updateCartUI() {
     let prodCart = document.getElementById("cart_products");
-    let productsInCart = allProducts.filter(product => {
+    let productsInCart = allProducts.map(product => {
         let storedProd = JSON.parse(localStorage.getItem(product.id));
-        return storedProd && storedProd.amount > 0;
-    });
-
+        return storedProd && storedProd.amount > 0 ? { ...product, amount: storedProd.amount } : null;
+    }).filter(prod => prod !== null);
     if (productsInCart.length > 0) {
         if (!prodCart) {
             createSectionCart();
