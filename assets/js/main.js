@@ -172,6 +172,7 @@ function decreaseAmount(prodId) {
         localStorage.setItem(prodId, JSON.stringify(storedProd));
     } else {
         localStorage.removeItem(prodId);
+        showAlert("Product removed from card successfully.!", "success")
     }
     updateCartUI();
 }
